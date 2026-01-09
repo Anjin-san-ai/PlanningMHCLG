@@ -10,7 +10,7 @@ env:
   APP_NAME: mhclg-planning-app
 
 jobs:
-  build-and-deploy:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,12 +29,9 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ env.ACR_NAME }}.azurecr.io/mhclg-planning:${{ github.sha }}
             ${{ env.ACR_NAME }}.azurecr.io/mhclg-planning:latest
 
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ env.APP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          images: ${{ env.ACR_NAME }}.azurecr.io/mhclg-planning:${{ github.sha }}
+      - name: Trigger Azure Web App deployment
+        run: |
+          curl -X POST "${{ secrets.WEBAPP_WEBHOOK_URL }}" \
+            -H "Content-Length: 0"
