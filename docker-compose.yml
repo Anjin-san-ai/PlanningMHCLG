@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  # MHCLG Planning Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_NEURO_SAN_URL=http://neuro-san:30011
+      - VITE_NEURO_SAN_WS_URL=ws://localhost:30011
+    depends_on:
+      - neuro-san
+    networks:
+      - mhclg-network
+    restart: unless-stopped
+
+  # Neuro SAN Agent Server
+  neuro-san:
+    build:
+      context: ./neuro-san
+      dockerfile: Dockerfile
+    ports:
+      - "30011:30011"
+      - "4173:4173"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PYTHONPATH=/app
+      - AGENT_REGISTRY_PATH=/app/registries
+    volumes:
+      - ./neuro-san/registries:/app/registries:ro
+      - ./neuro-san/logs:/app/logs
+    networks:
+      - mhclg-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:30011/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  mhclg-network:
+    driver: bridge
+
+volumes:
+  neuro-san-logs:
+

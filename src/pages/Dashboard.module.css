@@ -1,0 +1,332 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+}
+
+/* Hero Section */
+.hero {
+  background: var(--color-bg-header);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  color: var(--color-text-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(29, 112, 184, 0.2) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  margin-bottom: var(--spacing-xl);
+}
+
+.heroTitle {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: -0.02em;
+}
+
+.heroSubtitle {
+  font-size: var(--font-size-lg);
+  opacity: 0.9;
+  max-width: 600px;
+}
+
+.heroStats {
+  display: flex;
+  gap: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.statCard {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  min-width: 160px;
+}
+
+.statValue {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+}
+
+.statLabel {
+  font-size: var(--font-size-sm);
+  opacity: 0.8;
+}
+
+/* User Role Card - Teal/Cyan accent */
+.statCardUser {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.25) 0%, rgba(20, 184, 166, 0.2) 100%);
+  border-color: rgba(6, 182, 212, 0.4);
+}
+
+/* Council Card - Amber/Orange accent */
+.statCardCouncil {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(251, 191, 36, 0.2) 100%);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+/* Widgets Section */
+.widgetsSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.sectionDescription {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.integrationNote {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+/* Connected Widgets Flow Diagram */
+.connectedWidgetsSection {
+  margin-bottom: var(--spacing-xl);
+}
+
+.connectedWidgetsRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  flex-wrap: wrap;
+  padding: var(--spacing-lg);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(139, 92, 246, 0.03) 100%);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.connectedWidgetItem {
+  display: flex;
+  align-items: center;
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.connectedWidgetCard {
+  flex-shrink: 0;
+  width: 280px;
+}
+
+/* Bidirectional Arrow Connector */
+.arrowConnector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.arrowConnector svg {
+  width: 48px;
+  height: 24px;
+  color: var(--color-primary);
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.connectedWidgetItem:hover + .connectedWidgetItem .arrowConnector svg,
+.arrowConnector:hover svg {
+  opacity: 1;
+}
+
+/* Section Labels */
+.flowSectionLabel {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.subSectionHeader {
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.subSectionTitle {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* Standard Widgets Grid */
+.widgetsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.widgetWrapper {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .main {
+    margin-left: 240px;
+  }
+  
+  .content {
+    padding: var(--spacing-lg);
+  }
+  
+  .heroStats {
+    flex-wrap: wrap;
+  }
+  
+  .statCard {
+    min-width: 140px;
+  }
+  
+  .connectedWidgetsRow {
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
+  
+  .connectedWidgetCard {
+    width: 260px;
+  }
+  
+  .arrowConnector {
+    padding: 0 var(--spacing-xs);
+  }
+  
+  .arrowConnector svg {
+    width: 36px;
+  }
+  
+  .widgetsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    margin-left: 0;
+  }
+  
+  .content {
+    padding: var(--spacing-md);
+  }
+  
+  .hero {
+    padding: var(--spacing-lg);
+  }
+  
+  .heroTitle {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .heroSubtitle {
+    font-size: var(--font-size-base);
+  }
+  
+  .heroStats {
+    gap: var(--spacing-sm);
+  }
+  
+  .statCard {
+    flex: 1;
+    min-width: 100px;
+    padding: var(--spacing-md);
+  }
+  
+  .statValue {
+    font-size: var(--font-size-xl);
+  }
+  
+  .statLabel {
+    font-size: var(--font-size-xs);
+  }
+  
+  .connectedWidgetsRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+  }
+  
+  .connectedWidgetItem {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .connectedWidgetCard {
+    width: 100%;
+  }
+  
+  .arrowConnector {
+    transform: rotate(90deg);
+    padding: var(--spacing-xs) 0;
+  }
+  
+  .widgetsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
