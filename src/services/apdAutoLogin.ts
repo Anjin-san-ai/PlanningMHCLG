@@ -12,7 +12,7 @@ import { APD_CREDENTIALS } from '../config/apdCredentials'
  * Uses window.open with a data URL to inject a form that auto-submits.
  */
 export function openAPDWithAutoLogin(): void {
-  const { username, password, loginUrl } = APD_CREDENTIALS
+  const { username, loginUrl } = APD_CREDENTIALS
   
   // Open the login page
   const apdWindow = window.open(loginUrl, '_blank', 'noopener')
