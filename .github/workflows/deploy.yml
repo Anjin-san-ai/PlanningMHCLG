@@ -8,7 +8,6 @@ on:
 env:
   ACR_NAME: mhclgplanningacr
   APP_NAME: mhclg-planning-app
-  RESOURCE_GROUP: rg-mhclg-planning
 
 jobs:
   build-and-deploy:
@@ -33,13 +32,9 @@ jobs:
             ${{ env.ACR_NAME }}.azurecr.io/mhclg-planning:${{ github.sha }}
             ${{ env.ACR_NAME }}.azurecr.io/mhclg-planning:latest
 
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.APP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           images: ${{ env.ACR_NAME }}.azurecr.io/mhclg-planning:${{ github.sha }}
